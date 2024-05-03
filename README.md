@@ -276,6 +276,22 @@ akan menavigasikan pengguna ke rute yang sesuai tanpa me-refresh seluruh halaman
 
 ### 12. Apa perbedaan element prop di `<Route>` React Router v6 dibandingkan dengan component prop di versi sebelumnya?
 
+- Pada React Router v5, kita mendefinisikan sebuah rute menggunakan komponen `<Route>`, kita memberikan properti component untuk menentukan komponen mana yang akan ditampilkan ketika rute tersebut diakses.
+
+```js
+import { Route } from 'react-router-dom';
+
+<Route path="/home" component={Home} />;
+```
+
+- Pada React Router v6, kita menggunakan properti element untuk memberikan elemen React langsung yang akan ditampilkan.
+
+```js
+import { Route } from 'react-router-dom';
+
+<Route path="/home" element={<Home />} />;
+```
+
 ### 13. Bagaimana cara menerapkan lazy loading untuk komponen di React Router v6?
 
 ### 14. Apa kegunaan dari `useRoutes` hook dalam React Router v6?
