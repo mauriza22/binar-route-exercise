@@ -536,7 +536,79 @@ element. Setelah itu, kita menggunakan createRoutesFromElements untuk mengonvers
 
 ### 24. Apa itu resolvePath di React Router v6 dan bagaimana penggunaannya?
 
+resolvePath digunakan untuk mendapatkan path lengkap dari suatu rute relatif terhadap path saat ini. Ini berguna ketika kita perlu membuat tautan atau mengarahkan pengguna ke suatu rute, terutama jika rute tersebut bersifat dinamis atau
+bergantung pada konteks saat ini.
+
+```js
+import { useLocation, resolvePath } from 'react-router-dom';
+
+function Navigation() {
+  const location = useLocation();
+
+  // Mendapatkan path lengkap dari rute '/about'
+  const aboutPath = resolvePath('/about', location.pathname);
+
+  return (
+    <div>
+      <p>Alamat lengkap rute About: {aboutPath}</p>
+    </div>
+  );
+}
+```
+
+Dalam contoh ini, kita menggunakan resolvePath untuk mendapatkan alamat lengkap dari rute '/about' relatif terhadap path saat ini yang diperoleh dari `useLocation()`.
+
+Di dalam variabel aboutPath, akan dikembalikan alamat lengkap dari rute '/about' relatif terhadap lokasi saat ini yang diperoleh dari useLocation(). Misalnya, jika lokasi saat ini adalah "/dashboard", dan alamat lengkap dari rute '/about'
+adalah "/dashboard/about". Jadi, nilai yang akan dikembalikan di variabel aboutPath adalah "/dashboard/about".
+
 ### 25. Bagaimana cara mengimplementasikan search functionality menggunakan React Router v6?
+
+kita membutuh sebuah komponen SearchBox. Komponen ini akan berisi input untuk mengetik kata kunci pencarian dan tombol untuk memulai pencarian.
+
+```js
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function SearchBox() {
+  const [keyword, setKeyword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    // Navigasi ke halaman pencarian dengan kata kunci yang dimasukkan
+    navigate(`/search?keyword=${keyword}`);
+  };
+
+  return (
+    <div>
+      <input type="text" value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="Search products..." />
+      <button onClick={handleSearch}>Search</button>
+    </div>
+  );
+}
+
+export default SearchBox;
+```
+
+kemudian dapat menggunakan hook useParams untuk mengakses parameter pencarian dari URL dan menampilkannya sesuai kebutuhan.
+
+````jsx
+import { useParams } from 'react-router-dom';
+
+function SearchResults() {
+  const { keyword } = useParams();
+
+  // Lakukan sesuatu dengan kata kunci pencarian, misalnya, ambil produk yang sesuai dari API
+
+  return (
+    <div>
+      <h2>Search Results for "{keyword}"</h2>
+      {/* Tampilkan hasil pencarian di sini */}
+    </div>
+  );
+}
+
+export default SearchResults;
+```
 
 ### 26. Apa itu caseSensitive prop pada `<Route>` dan apa fungsinya?
 
@@ -547,3 +619,4 @@ element. Setelah itu, kita menggunakan createRoutesFromElements untuk mengonvers
 ### 29. Bagaimana cara menggunakan createMemoryRouter di React Router v6?
 
 ### 30. Bagaimana cara menggunakan generatePath di React Router v6?
+````
