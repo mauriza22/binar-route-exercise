@@ -591,7 +591,7 @@ export default SearchBox;
 
 kemudian dapat menggunakan hook useParams untuk mengakses parameter pencarian dari URL dan menampilkannya sesuai kebutuhan.
 
-````jsx
+```jsx
 import { useParams } from 'react-router-dom';
 
 function SearchResults() {
@@ -612,11 +612,115 @@ export default SearchResults;
 
 ### 26. Apa itu caseSensitive prop pada `<Route>` dan apa fungsinya?
 
+caseSensitive prop pada <Route> adalah properti yang menentukan apakah perbedaan huruf besar dan kecil harus diperhatikan saat mencocokkan URL dengan rute. Jadi, jika caseSensitive diatur menjadi true, maka huruf besar dan kecil akan
+menjadi penting saat mencocokkan URL.
+
+Contoh mudahnya adalah ketika kita memiliki rute "/products" dan pengguna mencoba mengaksesnya dengan "/Products". Jika caseSensitive diatur menjadi true, maka rute "/Products" tidak akan cocok dengan "/products". Tetapi jika caseSensitive
+diatur menjadi false, maka keduanya akan dianggap cocok.
+
+Jadi, caseSensitive memungkinkan kita untuk mengontrol apakah kita ingin memperhatikan perbedaan huruf besar dan kecil saat mencocokkan URL dengan rute.
+
 ### 27. Bagaimana cara mengekspos path sebagai prop ke komponen rute di React Router v6?
+
+Untuk mengekspos path sebagai prop ke komponen rute di React Router v6, kita dapat menggunakan properti element pada <Route> dan melewatkan komponen dengan props yang diinginkan.
+
+Contoh
+
+```jsx
+import { Route } from 'react-router-dom';
+import AboutPage from './AboutPage';
+
+const App = () => {
+  return (
+    <div>
+      {/* Menyertakan prop "path" ke komponen AboutPage */}
+      <Route path="/about" element={<AboutPage path="/about" />} />
+    </div>
+  );
+};
+
+export default App;
+```
+
+Di sini, kita menyertakan properti path ke komponen AboutPage menggunakan properti element di <Route>. Kemudian, kita dapat mengakses nilai prop path di dalam komponen AboutPage sebagai berikut:
+
+```jsx
+const AboutPage = ({ path }) => {
+  console.log(path); // Output: "/about"
+
+  // Komponen AboutPage lainnya...
+};
+
+export default AboutPage;
+```
 
 ### 28. Apa itu basename dalam `<BrowserRouter>` dan bagaimana penggunaannya?
 
+basename adalah properti yang digunakan dalam komponen <BrowserRouter> di React Router. Properti ini menentukan bagian awalan dari URL yang digunakan untuk menentukan "lokasi" aplikasi web secara relatif terhadap server.
+
+```jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+const App = () => {
+  return (
+    <BrowserRouter basename="/myapp">
+      {/* Di sini, kita menggunakan `basename="/myapp"` */}
+      {/* Ini seperti memberi tahu aplikasi kita bahwa semua rute akan dimulai dengan "/myapp" */}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        {/* Misalnya, jika `basename="/myapp"`, maka rute ini akan menjadi "/myapp/about" */}
+        {/* Karena `basename` adalah bagian awalan dari semua rute */}
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
+```
+
+Dalam contoh ini, kita menggunakan <BrowserRouter> untuk membungkus aplikasi kita. Properti basename="/myapp" memberi tahu aplikasi kita bahwa semua rute akan dimulai dengan "/myapp". Jadi, ketika Anda menavigasi ke rute "/about",
+sebenarnya itu akan menjadi "/myapp/about" karena basename telah ditentukan.
+
 ### 29. Bagaimana cara menggunakan createMemoryRouter di React Router v6?
 
+createMemoryRouter adalah cara untuk membuat router di React Router v6 yang bekerja di dalam memori, tanpa terkait dengan URL browser. Ini berguna jika ingin melakukan navigasi di dalam aplikasi tanpa benar-benar mengubah URL di browser.
+
+```jsx
+import { createMemoryHistory, MemoryRouter, Routes, Route } from 'react-router-dom';
+
+const App = () => {
+  const history = createMemoryHistory();
+
+  return (
+    <MemoryRouter history={history}>
+      {/* Di sini, kita menggunakan createMemoryRouter */}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        {/* Misalnya, jika Anda menggunakan createMemoryRouter, rute tidak akan mempengaruhi URL browser */}
+      </Routes>
+    </MemoryRouter>
+  );
+};
+
+export default App;
+```
+
+Dalam contoh ini, kita membuat MemoryRouter dengan menggunakan createMemoryHistory(). Ini membuat router yang bekerja dalam memori, sehingga navigasi di dalam aplikasi tidak akan mempengaruhi URL browser.
+
 ### 30. Bagaimana cara menggunakan generatePath di React Router v6?
-````
+
+generatePath adalah fungsi yang digunakan untuk menghasilkan URL berdasarkan pola path dari rute yang didefinisikan di React Router v6. Ini memungkinkan kita untuk membuat URL secara dinamis berdasarkan parameter yang diberikan.
+
+Contohnya, jika Anda memiliki rute dengan pola path /products/:id dan ingin membuat URL untuk produk dengan ID 123, Anda dapat menggunakan generatePath('/products/:id', { id: 123 }). Ini akan menghasilkan URL /products/123.
+
+```jsx
+import { generatePath } from 'react-router-dom';
+
+const productId = 123;
+const productUrl = generatePath('/products/:id', { id: productId });
+console.log(productUrl); // Output: "/products/123"
+```
