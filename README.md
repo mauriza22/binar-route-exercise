@@ -9,12 +9,12 @@
 | Component untuk Route | Menggunakan `<Route>` dan <Switch>                              | Menggunakan `<Routes>` dan `<Route>`                      |
 | Penggunaan Router     | Terdapat beberapa tipe router (BrowserRouter, HashRouter, etc.) | Hanya menggunakan `<BrowserRouter>` atau `<MemoryRouter>` |
 | Penanganan Redirect   | Menggunakan `<Redirect>` komponen atau fungsi `history.push`    | Menggunakan fungsi navigate dari hook `useNavigate`       |
-| Penanganan 404        | Penggunaan <Route> dengan path="\*"                             | Menggunakan rute terakhir dalam <Routes>                  |
-| Nesting Route         | Menggunakan rute bersarang dalam komponen `<Route>`             | Menggunakan rute bersarang dalam komponen `<Routes>`      |
+| Penanganan 404        | Penggunaan <Route> dengan path="\*"                             | Menggunakan route terakhir dalam <Routes>                 |
+| Nesting Route         | Menggunakan nested route dalam komponen `<Route>`               | Menggunakan nested route dalam komponen `<Routes>`        |
 
 ### 2. Apa fungsi dari komponen `<Routes>` di React Router v6?
 
-`<Routes>` dalam React Router v6 berfungsi untuk menampung semua rute (routes) yang kita perlukan dalam pembentukan aplikasi.
+`<Routes>` dalam React Router v6 berfungsi untuk menampung semua routes (routes) yang kita perlukan dalam pembentukan aplikasi.
 
 contoh:
 
@@ -39,10 +39,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Rute dasar */}
+        {/* route dasar */}
         <Route path="" element={<Home />} />
 
-        {/* Rute lainnya */}
+        {/* route lainnya */}
         {/* ... */}
       </Routes>
     </Router>
@@ -56,7 +56,7 @@ Dalam contoh ini, `<Route path="" element={<Home />} />` menentukan rute dasar y
 
 ### 4. Apa itu nested routes di React Router v6 dan bagaimana cara menerapkannya?
 
-Nested routes di React Router v6 adalah konsep di mana kita dapat menempatkan satu set rute di dalam rute lainnya. Ini berguna ketika kita memiliki struktur halaman yang terdiri dari beberapa komponen yang saling berhubungan secara
+Nested routes di React Router v6 adalah konsep di mana kita dapat menempatkan satu set route di dalam route lainnya. Ini berguna ketika kita memiliki struktur halaman yang terdiri dari beberapa komponen yang saling berhubungan secara
 hierarkis.
 
 Misal kita punya page about, di page about tersebut terdiri dari beberapa section atau bagian. jadi di routenya tetap dimulai dari about/{namaSection}
@@ -129,7 +129,7 @@ const About = () => {
 
 ### 5. Apa fungsi dari hook useNavigate di React Router v6?
 
-hook useNavigate untuk mendapatkan fungsi navigate. Ketika tombol diklik, fungsi navigate akan dipanggil dengan rute yang dituju sebagai argumen, dalam hal ini "/about". Ini akan mengarahkan pengguna ke halaman "/about".
+hook useNavigate untuk mendapatkan fungsi navigate. Ketika tombol diklik, fungsi navigate akan dipanggil dengan route yang dituju sebagai argumen, dalam hal ini "/about". Ini akan mengarahkan pengguna ke halaman "/about".
 
 ```js
 const MyComponent = () => {
@@ -184,10 +184,10 @@ useSearchParams. Hook ini memungkinkan kita untuk mendapatkan nilai dari query s
 
 ### 9. Apa itu outlet di React Router v6 dan bagaimana penggunaannya?
 
-Outlet dalam React Router v6 adalah sebuah komponen yang digunakan untuk menampilkan konten dari rute yang ditentukan. Ketika kita menggunakan outlet, React Router akan menempatkan konten dari rute yang sesuai di tempat di mana outlet
+Outlet dalam React Router v6 adalah sebuah komponen yang digunakan untuk menampilkan konten dari route yang ditentukan. Ketika kita menggunakan outlet, React Router akan menempatkan konten dari route yang sesuai di tempat di mana outlet
 tersebut ditempatkan dalam aplikasi kita.
 
-Contohnya, jika kita memiliki rute seperti ini:
+Contohnya, jika kita memiliki route seperti ini:
 
 ```js
 <Routes>
@@ -197,21 +197,21 @@ Contohnya, jika kita memiliki rute seperti ini:
 </Routes>
 ```
 
-Kita dapat menempatkan outlet di komponen utama kita, yang akan menampilkan konten dari rute yang sesuai:
+Kita dapat menempatkan outlet di komponen utama kita, yang akan menampilkan konten dari route yang sesuai:
 
 ```js
 function App() {
   return (
     <div>
       <h1>My App</h1>
-      {/* Outlet akan menampilkan konten dari rute yang sesuai */}
+      {/* Outlet akan menampilkan konten dari route yang sesuai */}
       <Outlet />
     </div>
   );
 }
 ```
 
-Dalam contoh di atas, jika kita menavigasi ke /about, maka komponen `<About />` akan ditampilkan di dalam outlet. Jadi, outlet memungkinkan kita untuk menentukan di mana konten dari rute-rute aplikasi kita akan ditampilkan.
+Dalam contoh di atas, jika kita menavigasi ke /about, maka komponen `<About />` akan ditampilkan di dalam outlet. Jadi, outlet memungkinkan kita untuk menentukan di mana konten dari routes aplikasi kita akan ditampilkan.
 
 ### 10. Bagaimana cara melindungi rute yang memerlukan autentikasi di React Router v6?
 
@@ -222,7 +222,7 @@ import { Navigate, Route } from 'react-router-dom';
 
 const PrivateRoute = ({ isAuthenticated, ...props }) => {
   if (isAuthenticated) {
-    // Jika pengguna terautentikasi, izinkan akses ke rute yang dituju
+    // Jika pengguna terautentikasi, izinkan akses ke routes yang dituju
     return <Route {...props} />;
   } else {
     // Jika pengguna tidak terautentikasi, arahkan ke halaman login
@@ -271,12 +271,12 @@ const Navigation = () => {
 export default Navigation;
 ```
 
-Dalam contoh di atas, kita menggunakan `<Link>` untuk membuat tautan ke halaman-halaman dalam aplikasi kita. Properti to digunakan untuk menentukan rute yang ingin dituju oleh tautan tersebut. Ketika pengguna mengklik tautan, React Router
-akan menavigasikan pengguna ke rute yang sesuai tanpa me-refresh seluruh halaman.
+Dalam contoh di atas, kita menggunakan `<Link>` untuk membuat tautan ke halaman-halaman dalam aplikasi kita. Properti to digunakan untuk menentukan routes yang ingin dituju oleh tautan tersebut. Ketika pengguna mengklik tautan, React Router
+akan menavigasikan pengguna ke routes yang sesuai tanpa me-refresh seluruh halaman.
 
 ### 12. Apa perbedaan element prop di `<Route>` React Router v6 dibandingkan dengan component prop di versi sebelumnya?
 
-- Pada React Router v5, kita mendefinisikan sebuah rute menggunakan komponen `<Route>`, kita memberikan properti component untuk menentukan komponen mana yang akan ditampilkan ketika rute tersebut diakses.
+- Pada React Router v5, kita mendefinisikan sebuah routes menggunakan komponen `<Route>`, kita memberikan properti component untuk menentukan komponen mana yang akan ditampilkan ketika routes tersebut diakses.
 
 ```js
 import { Route } from 'react-router-dom';
@@ -296,7 +296,7 @@ import { Route } from 'react-router-dom';
 
 ### 14. Apa kegunaan dari `useRoutes` hook dalam React Router v6?
 
-useRoutes adalah hook yang digunakan dalam React Router v6 untuk menentukan rute-rute dalam aplikasi. Ini memungkinkan kita untuk menentukan rute-rute aplikasi secara dinamis berdasarkan logika yang kita tentukan.
+useRoutes adalah hook yang digunakan dalam React Router v6 untuk menentukan routes dalam aplikasi. Ini memungkinkan kita untuk menentukan rute-rute aplikasi secara dinamis berdasarkan logika yang kita tentukan.
 
 ```js
 import { useRoutes } from 'react-router-dom';
