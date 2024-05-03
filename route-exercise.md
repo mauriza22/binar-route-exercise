@@ -150,7 +150,7 @@ const MyComponent = () => {
 
 ### 6. Bagaimana cara melakukan redirect di React Router v6?
 
-Untuk melakukan redirect di React Router v6, kita dapat menggunakan fungsi navigate dari hook useNavigate
+Untuk melakukan redirect di React Router v6, kita dapat menggunakan fungsi navigate dari hook useNavigate.
 
 ### 7. Apa kegunaan dari useParams hook dalam React Router v6?
 
@@ -183,6 +183,35 @@ Dalam contoh di atas, kita menggunakan useParams untuk mengambil nilai parameter
 useSearchParams. Hook ini memungkinkan kita untuk mendapatkan nilai dari query string yang terdapat pada URL.
 
 ### 9. Apa itu outlet di React Router v6 dan bagaimana penggunaannya?
+
+Outlet dalam React Router v6 adalah sebuah komponen yang digunakan untuk menampilkan konten dari rute yang ditentukan. Ketika kita menggunakan outlet, React Router akan menempatkan konten dari rute yang sesuai di tempat di mana outlet
+tersebut ditempatkan dalam aplikasi kita.
+
+Contohnya, jika kita memiliki rute seperti ini:
+
+```js
+<Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<About />} />
+  <Route path="/contact" element={<Contact />} />
+</Routes>
+```
+
+Kita dapat menempatkan outlet di komponen utama kita, yang akan menampilkan konten dari rute yang sesuai:
+
+```js
+function App() {
+  return (
+    <div>
+      <h1>My App</h1>
+      {/* Outlet akan menampilkan konten dari rute yang sesuai */}
+      <Outlet />
+    </div>
+  );
+}
+```
+
+Dalam contoh di atas, jika kita menavigasi ke /about, maka komponen `<About />` akan ditampilkan di dalam outlet. Jadi, outlet memungkinkan kita untuk menentukan di mana konten dari rute-rute aplikasi kita akan ditampilkan.
 
 ### 10. Bagaimana cara melindungi rute yang memerlukan autentikasi di React Router v6?
 
