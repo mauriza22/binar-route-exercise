@@ -61,6 +61,72 @@ hierarkis.
 
 Misal kita punya page about, di page about tersebut terdiri dari beberapa section atau bagian. jadi di routenya tetap dimulai dari about/{namaSection}
 
+```js
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+const Home = () => <h1>Selamat datang di Halaman Beranda!</h1>;
+const About = () => <h1>Ini adalah Halaman Tentang Kami.</h1>;
+const Contact = () => <h1>Hubungi Kami di Halaman Kontak.</h1>;
+
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Beranda</Link>
+            </li>
+            <li>
+              <Link to="/about">Tentang Kami</Link>
+            </li>
+            <li>
+              <Link to="/contact">Kontak</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
+
+export default App;
+```
+
+```js
+const About = () => {
+  return (
+    <div>
+      <h1>About</h1>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/about/history">History</Link>
+          </li>
+          <li>
+            <Link to="/about/team">Our Team</Link>
+          </li>
+          <li>
+            <Link to="/about/location">Location</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="history" element={<History />} />
+        <Route path="team" element={<Team />} />
+        <Route path="location" element={<Location />} />
+      </Routes>
+    </div>
+  );
+};
+```
+
 ### 5. Apa fungsi dari hook useNavigate di React Router v6?
 
 hook useNavigate untuk mendapatkan fungsi navigate. Ketika tombol diklik, fungsi navigate akan dipanggil dengan rute yang dituju sebagai argumen, dalam hal ini "/about". Ini akan mengarahkan pengguna ke halaman "/about".
