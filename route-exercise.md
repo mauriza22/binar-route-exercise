@@ -4,13 +4,21 @@
 
 ### 1. Apa perbedaan utama antara React Router v5 dan v6?
 
+| Perbedaan             | React Router v5                                                 | React Router v6                                           |
+| --------------------- | --------------------------------------------------------------- | --------------------------------------------------------- |
+| Component untuk Route | Menggunakan `<Route>` dan <Switch>                              | Menggunakan `<Routes>` dan `<Route>`                      |
+| Penggunaan Router     | Terdapat beberapa tipe router (BrowserRouter, HashRouter, etc.) | Hanya menggunakan `<BrowserRouter>` atau `<MemoryRouter>` |
+| Penanganan Redirect   | Menggunakan `<Redirect>` komponen atau fungsi `history.push`    | Menggunakan fungsi navigate dari hook `useNavigate`       |
+| Penanganan 404        | Penggunaan <Route> dengan path="\*"                             | Menggunakan rute terakhir dalam <Routes>                  |
+| Nesting Route         | Menggunakan rute bersarang dalam komponen `<Route>`             | Menggunakan rute bersarang dalam komponen `<Routes>`      |
+
 ### 2. Apa fungsi dari komponen `<Routes>` di React Router v6?
 
 `<Routes>` dalam React Router v6 berfungsi untuk menampung semua rute (routes) yang kita perlukan dalam pembentukan aplikasi.
 
 contoh:
 
-```
+```js
 <Routes>
      <Route path=""/"" element={<Home />} />
      <Route path=""/about"" element={<About />} />
@@ -33,20 +41,20 @@ Misal kita punya page about, di page about tersebut terdiri dari beberapa sectio
 
 hook useNavigate untuk mendapatkan fungsi navigate. Ketika tombol diklik, fungsi navigate akan dipanggil dengan rute yang dituju sebagai argumen, dalam hal ini "/about". Ini akan mengarahkan pengguna ke halaman "/about".
 
-```
+```js
 const MyComponent = () => {
-    const navigate = useNavigate();
-    const handleClick = () => {
-        // Navigasi ke halaman "/about" ketika tombol diklik
-        navigate('/about');
-    };
+  const navigate = useNavigate();
+  const handleClick = () => {
+    // Navigasi ke halaman "/about" ketika tombol diklik
+    navigate('/about');
+  };
 
-   return (
-        <div>
-            <h1>Halaman Utama</h1>
-            <button onClick={handleClick}>About</button>
-        </div>
-    );
+  return (
+    <div>
+      <h1>Halaman Utama</h1>
+      <button onClick={handleClick}>About</button>
+    </div>
+  );
 };
 ```
 
@@ -58,11 +66,11 @@ Untuk melakukan redirect di React Router v6, kita dapat menggunakan fungsi navig
 
 useParams adalah hook yang disediakan oleh React Router v6 yang memungkinkan kita untuk mengakses parameter yang dikirimkan melalui URL
 
-```
+```js
 <Route path="/users/:id" element={<UserProfile />} />
 ```
 
-```
+```js
 import { useParams } from 'react-router-dom';
 
 const UserProfile = () => {
@@ -92,7 +100,7 @@ useSearchParams. Hook ini memungkinkan kita untuk mendapatkan nilai dari query s
 
 `<Link>` adalah komponen yang digunakan dalam React Router v6 untuk membuat tautan antar halaman dalam aplikasi React.
 
-```
+```js
 import { Link } from 'react-router-dom';
 
 const Navigation = () => {
@@ -130,7 +138,7 @@ akan menavigasikan pengguna ke rute yang sesuai tanpa me-refresh seluruh halaman
 
 useRoutes adalah hook yang digunakan dalam React Router v6 untuk menentukan rute-rute dalam aplikasi. Ini memungkinkan kita untuk menentukan rute-rute aplikasi secara dinamis berdasarkan logika yang kita tentukan.
 
-```
+```js
 import { useRoutes } from 'react-router-dom';
 
 const App = () => {
@@ -156,7 +164,7 @@ dapat merender halaman 404.
 
 1. Tentukan rute-rute aplikasi di dalam komponen Routes. Pastikan rute untuk halaman 404 diletakkan di akhir.
 
-```
+```js
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import About from './About';
@@ -178,7 +186,7 @@ const AppRoutes = () => {
 
 2. Buat komponen untuk halaman 404, misalnya NotFound, di mana kita akan menampilkan pesan bahwa halaman tidak ditemukan.
 
-```
+```js
 const NotFound = () => {
   return (
     <div>
@@ -196,7 +204,7 @@ export default NotFound;
 Navigate function yang dikembalikan oleh useNavigate hook adalah sebuah fungsi yang digunakan untuk melakukan navigasi programatik (navigasi yang diinisiasi oleh kode) dalam React Router v6. Dengan menggunakan navigate function, kita dapat
 melakukan navigasi antar halaman tanpa perlu menggunakan komponen Link atau Redirect.
 
-```
+```js
 import { useNavigate } from 'react-router-dom';
 
 const MyComponent = () => {
@@ -226,7 +234,7 @@ Dalam contoh di atas, kita menggunakan useNavigate hook untuk mendapatkan fungsi
 Menangani parameter opsional dalam rute di React Router v6 bisa dilakukan dengan menambahkan tanda kurung kurawal ({}) di sekitar parameter yang bersifat opsional di dalam definisi rute. Ini memungkinkan kita untuk membuat parameter
 tersebut opsional, artinya parameter tersebut dapat ada atau tidak dalam URL.
 
-```
+```js
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import ProductDetail from './ProductDetail'; // Komponen untuk halaman detail produk
@@ -249,7 +257,7 @@ tanpa parameter id, dan juga dengan URL /products/123 dengan parameter id.
 
 Untuk menangani redirect berdasarkan kondisi di React Router v6, kita dapat menggunakan komponen `<Navigate>` bersama dengan logika kondisional untuk menentukan apakah akan melakukan redirect atau tidak.
 
-```
+```js
 import { Navigate } from 'react-router-dom';
 
 const MyComponent = ({ isLoggedIn }) => {
@@ -272,7 +280,7 @@ Dalam contoh di atas, jika isLoggedIn bernilai false, maka `<Navigate>` akan mer
 
 ### 20. Bagaimana cara mendefinisikan rute dengan beberapa parameter di React Router v6?
 
-```
+```js
 
 ```
 
@@ -281,7 +289,7 @@ Dalam contoh di atas, jika isLoggedIn bernilai false, maka `<Navigate>` akan mer
 1. gunakan komponen <BrowserRouter> langsung dari package react-router-dom.
 2. Bungkus komponen utama aplikasi dengan <BrowserRouter> di dalam file yang paling tinggi di hirarki aplikasi, biasanya di index.js
 
-```
+```js
 import { BrowserRouter } from 'react-router-dom';
 
 import React from 'react';
