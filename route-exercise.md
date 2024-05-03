@@ -30,6 +30,30 @@ contoh:
 
 dengan path kosong ("")
 
+```js
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+const Home = () => <h1>Selamat datang di Halaman Beranda!</h1>;
+
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        {/* Rute dasar */}
+        <Route path="" element={<Home />} />
+
+        {/* Rute lainnya */}
+        {/* ... */}
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
+```
+
+Dalam contoh ini, `<Route path="" element={<Home />} />` menentukan rute dasar yang akan ditampilkan saat aplikasi dimuat. Ketika URL aplikasi berada di root (misalnya "http://localhost:3000/"), komponen `<Home />` akan ditampilkan.
+
 ### 4. Apa itu nested routes di React Router v6 dan bagaimana cara menerapkannya?
 
 Nested routes di React Router v6 adalah konsep di mana kita dapat menempatkan satu set rute di dalam rute lainnya. Ini berguna ketika kita memiliki struktur halaman yang terdiri dari beberapa komponen yang saling berhubungan secara
