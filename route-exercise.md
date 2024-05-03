@@ -215,6 +215,32 @@ Dalam contoh di atas, jika kita menavigasi ke /about, maka komponen `<About />` 
 
 ### 10. Bagaimana cara melindungi rute yang memerlukan autentikasi di React Router v6?
 
+hal tersebut dapat dilakukan dengan meembuat komponen `PrivateRoute` yang akan memeriksa status autentikasi pengguna.
+
+```js
+import { Navigate, Route } from 'react-router-dom';
+
+const PrivateRoute = ({ isAuthenticated, ...props }) => {
+  if (isAuthenticated) {
+    // Jika pengguna terautentikasi, izinkan akses ke rute yang dituju
+    return <Route {...props} />;
+  } else {
+    // Jika pengguna tidak terautentikasi, arahkan ke halaman login
+    return <Navigate to="/login" />;
+  }
+};
+```
+
+kemudian komponen tersebut digunakan di dalam route, kemudian gunakan prop `isAuthenticated` yang menunjukkan apakah pengguna sudah terautentikasi atau belum.
+
+```js
+<Routes>
+  <Route path="/login" element={<LoginPage />} />
+  <PrivateRoute path="/dashboard" element={<DashboardPage />} isAuthenticated={user.isAuthenticated} />
+  {/* Rute-rute lainnya */}
+</Routes>
+```
+
 ### 11. Bagaimana cara menggunakan `<Link>` di React Router v6?
 
 `<Link>` adalah komponen yang digunakan dalam React Router v6 untuk membuat tautan antar halaman dalam aplikasi React.
